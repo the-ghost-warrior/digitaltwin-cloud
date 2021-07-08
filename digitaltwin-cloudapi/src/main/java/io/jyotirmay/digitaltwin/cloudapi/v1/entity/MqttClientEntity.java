@@ -2,31 +2,35 @@ package io.jyotirmay.digitaltwin.cloudapi.v1.entity;
 
 import io.jyotirmay.digitaltwin.cloudapi.v1.model.MqttClient;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 
+@Entity(name = "mqtt_client")
 public class MqttClientEntity implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private final String clientId;
+    private String clientId;
 
-    private final boolean cleanSession;
+    private boolean cleanSession;
 
-    private final String username;
+    private String username;
 
-    private final String password;
+    private String password;
 
-    private final String lastWillTopic;
+    private String lastWillTopic;
 
-    private final int lastWillQos;
+    private int lastWillQos;
 
-    private final String lastWillMessage;
+    private String lastWillMessage;
 
-    private final boolean lastWillRetain;
+    private boolean lastWillRetain;
 
-    private final int keepAlive;
+    private int keepAlive;
 
     private Date createdOn;
 
@@ -34,18 +38,8 @@ public class MqttClientEntity implements Serializable {
 
     private boolean active;
 
-    public MqttClientEntity(String clientId, boolean cleanSession, String username, String password,
-                            String lastWillTopic, int lastWillQos, String lastWillMessage,
-                            boolean lastWillRetain, int keepAlive) {
-        this.clientId = clientId;
-        this.cleanSession = cleanSession;
-        this.username = username;
-        this.password = password;
-        this.lastWillTopic = lastWillTopic;
-        this.lastWillQos = lastWillQos;
-        this.lastWillMessage = lastWillMessage;
-        this.lastWillRetain = lastWillRetain;
-        this.keepAlive = keepAlive;
+    public MqttClientEntity(){
+
     }
 
     public MqttClientEntity(MqttClient mqttClient) {
@@ -58,6 +52,14 @@ public class MqttClientEntity implements Serializable {
         this.lastWillMessage = mqttClient.getLastWillMessage();
         this.lastWillRetain = mqttClient.isLastWillRetain();
         this.keepAlive = mqttClient.getKeepAlive();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getClientId() {
@@ -100,32 +102,24 @@ public class MqttClientEntity implements Serializable {
         return createdOn;
     }
 
-    public Date getUpdatedOn() {
-        return updatedOn;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
     public void setCreatedOn(Date createdOn) {
         this.createdOn = createdOn;
+    }
+
+    public Date getUpdatedOn() {
+        return updatedOn;
     }
 
     public void setUpdatedOn(Date updatedOn) {
         this.updatedOn = updatedOn;
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
     public void setActive(boolean active) {
         this.active = active;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     @Override
@@ -137,7 +131,7 @@ public class MqttClientEntity implements Serializable {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", lastWillTopic='" + lastWillTopic + '\'' +
-                ", lastWillQos='" + lastWillQos + '\'' +
+                ", lastWillQos=" + lastWillQos +
                 ", lastWillMessage='" + lastWillMessage + '\'' +
                 ", lastWillRetain=" + lastWillRetain +
                 ", keepAlive=" + keepAlive +
