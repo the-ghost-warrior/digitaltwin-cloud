@@ -20,7 +20,7 @@ public class MqttClientEntity implements Serializable {
 
     private final String lastWillTopic;
 
-    private final String lastWillQos;
+    private final int lastWillQos;
 
     private final String lastWillMessage;
 
@@ -35,7 +35,7 @@ public class MqttClientEntity implements Serializable {
     private boolean active;
 
     public MqttClientEntity(String clientId, boolean cleanSession, String username, String password,
-                            String lastWillTopic, String lastWillQos, String lastWillMessage,
+                            String lastWillTopic, int lastWillQos, String lastWillMessage,
                             boolean lastWillRetain, int keepAlive) {
         this.clientId = clientId;
         this.cleanSession = cleanSession;
@@ -80,7 +80,7 @@ public class MqttClientEntity implements Serializable {
         return lastWillTopic;
     }
 
-    public String getLastWillQos() {
+    public int getLastWillQos() {
         return lastWillQos;
     }
 

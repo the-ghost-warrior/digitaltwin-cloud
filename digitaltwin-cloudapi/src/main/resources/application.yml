@@ -1,0 +1,17 @@
+
+spring:
+  application:
+    name: digitaltwin-cloudapi
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: password
+    url: jdbc:postgresql://localhost:5432/digitaltwin
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      idle-timeout: 60000
+      maximum-pool-size: 2
+      minimum-idle: 1
+
+server:
+  port: 8081

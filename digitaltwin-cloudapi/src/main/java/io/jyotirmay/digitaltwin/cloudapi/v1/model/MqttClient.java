@@ -1,5 +1,7 @@
 package io.jyotirmay.digitaltwin.cloudapi.v1.model;
 
+import io.jyotirmay.digitaltwin.cloudapi.v1.entity.MqttClientEntity;
+
 import java.io.Serializable;
 
 public class MqttClient implements Serializable {
@@ -14,7 +16,7 @@ public class MqttClient implements Serializable {
 
     private final String lastWillTopic;
 
-    private final String lastWillQos;
+    private final int lastWillQos;
 
     private final String lastWillMessage;
 
@@ -23,7 +25,7 @@ public class MqttClient implements Serializable {
     private final int keepAlive;
 
     public MqttClient(String clientId, boolean cleanSession, String username, String password,
-                      String lastWillTopic, String lastWillQos, String lastWillMessage,
+                      String lastWillTopic, int lastWillQos, String lastWillMessage,
                       boolean lastWillRetain, int keepAlive) {
         this.clientId = clientId;
         this.cleanSession = cleanSession;
@@ -34,6 +36,18 @@ public class MqttClient implements Serializable {
         this.lastWillMessage = lastWillMessage;
         this.lastWillRetain = lastWillRetain;
         this.keepAlive = keepAlive;
+    }
+
+    public MqttClient(MqttClientEntity mqttClientEntity){
+        this.clientId = mqttClientEntity.getClientId();
+        this.cleanSession = mqttClientEntity.isCleanSession();
+        this.username = mqttClientEntity.getUsername();
+        this.password = mqttClientEntity.getPassword();
+        this.lastWillTopic = mqttClientEntity.getLastWillTopic();
+        this.lastWillQos = mqttClientEntity.getLastWillQos();
+        this.lastWillMessage = mqttClientEntity.getLastWillMessage();
+        this.lastWillRetain = mqttClientEntity.isLastWillRetain();
+        this.keepAlive = mqttClientEntity.getKeepAlive();
     }
 
     public String getClientId() {
@@ -56,7 +70,7 @@ public class MqttClient implements Serializable {
         return lastWillTopic;
     }
 
-    public String getLastWillQos() {
+    public int getLastWillQos() {
         return lastWillQos;
     }
 
